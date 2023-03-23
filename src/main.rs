@@ -5,8 +5,19 @@ use std::cmp::Ordering;
 
 fn main() {
     //task1();
-    task2();
+    //task2();
+    task3();
 }
+
+
+struct Fruit{
+    name: String,
+    color: String,
+    readyForSale: bool,
+}
+
+
+
 
 fn task1(){
     struct person{
@@ -117,3 +128,36 @@ fn task2(){
     println!("Most popular color is {} and it is used by {} people", maxColor, maxPeople);
         
     }  
+fn task3(){
+    let mut fruits: Vec<Fruit> = Vec::new();
+    let mut check = true;
+    while check {
+        println!("Enter name");
+        let mut name = String::new();
+        stdin().read_line(&mut name).expect("Failed to read line");
+        println!("Enter color");
+        let mut color = String::new();
+        stdin().read_line(&mut color).expect("Failed to read line");
+        println!("Enter ready for sale (true/false)");
+        let mut readyForSale = String::new();
+        stdin().read_line(&mut readyForSale).expect("Failed to read line");
+        let readyForSale: bool = readyForSale.trim().parse().expect("Please type a number!");
+        let fruit = Fruit{
+            name: name.trim().to_string(),
+            color: color.trim().to_string(),
+            readyForSale: readyForSale,
+        };
+        fruits.push(fruit);
+        println!("Do you want to continue? (y/n)");
+        let mut answer = String::new();
+        stdin().read_line(&mut answer).expect("Failed to read line");
+        if answer.trim() == "No" || answer.trim() == "no" || answer.trim() == "n" || answer.trim() == "N" {
+            check = false;
+        }
+    }
+    for fruit in &fruits {
+        if fruit.color == fruit.name {
+            println!("{} {} has the same name and color", fruit.name, fruit.color);
+        }
+    }
+}
