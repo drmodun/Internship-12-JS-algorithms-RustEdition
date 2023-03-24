@@ -7,7 +7,8 @@ fn main() {
     //task1();
     //task2();
     //task3();
-    task4();
+    //task4();
+    task5();
 }
 
 
@@ -214,6 +215,48 @@ fn task4(){
             }
         }
         println!("New fruit: {} {:?}", multiColoredFruits[i].name, multiColoredFruits[i].color);
+    }
+
+}
+fn task5(){
+    let mut fruits: Vec<MultiFruit> = Vec::new();
+    let mut check = true;
+    while check {
+        println!("Enter name");
+        let mut name = String::new();
+        stdin().read_line(&mut name).expect("Failed to read line");
+        let mut amountOfColorsTry = String::new();
+        stdin().read_line(&mut amountOfColorsTry).expect("Failed to read line");
+        let amountOfColors: i32 = amountOfColorsTry.trim().parse().expect("Please type a number!");
+        let mut colors: Vec<String> = Vec::new();
+        for i in 0..amountOfColors {
+            println!("Enter color");
+            let mut color = String::new();
+            stdin().read_line(&mut color).expect("Failed to read line");
+            colors.push(color.trim().to_string());
+        }
+        let mut color = String::new();
+        stdin().read_line(&mut color).expect("Failed to read line");
+        println!("Enter ready for sale (true/false)");
+        let mut readyForSale = String::new();
+        stdin().read_line(&mut readyForSale).expect("Failed to read line");
+        let readyForSale: bool = readyForSale.trim().parse().expect("Please type a number!");
+        let fruit = MultiFruit{
+            name: name.trim().to_string(),
+            color: colors,
+            readyForSale: readyForSale,
+        };
+        fruits.push(fruit);
+        println!("Do you want to continue? (y/n)");
+        let mut answer = String::new();
+        stdin().read_line(&mut answer).expect("Failed to read line");
+        if answer.trim() == "No" || answer.trim() == "no" || answer.trim() == "n" || answer.trim() == "N" {
+            check = false;
+        }
+    }
+    let yellowFruits: Vec<&MultiFruit> = fruits.iter().filter(|&x| x.color.contains(&String::from("yellow"))).collect();
+    for fruit in &yellowFruits {
+        println!("{}", fruit.name);
     }
 
 }
